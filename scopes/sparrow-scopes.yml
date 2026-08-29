@@ -1,0 +1,49 @@
+generated: '2026-08-28'
+method: probed
+source: https://login.trysparrow.com/.well-known/openid-configuration
+note: >-
+  These are the scopes the anonymously-published OIDC discovery document on Sparrow's own sign-in
+  domain advertises as supported. They are the standard OpenID Connect / Auth0 identity scopes for
+  application sign-in — Sparrow publishes NO product or resource scopes, because it publishes no
+  third-party API. Nothing here was authored by API Evangelist; the list is verbatim from
+  scopes_supported.
+issuer: https://login.trysparrow.com/
+scope_count: 14
+scopes:
+- name: openid
+  description: Request an ID token; required for OpenID Connect.
+- name: profile
+  description: Basic profile claims (name, nickname, picture, created_at).
+- name: offline_access
+  description: Issue a refresh token for long-lived sessions.
+- name: name
+  description: The user's full name claim.
+- name: given_name
+  description: The user's given name claim.
+- name: family_name
+  description: The user's family name claim.
+- name: nickname
+  description: The user's nickname claim.
+- name: email
+  description: The user's email address claim.
+- name: email_verified
+  description: Whether the user's email has been verified.
+- name: picture
+  description: The user's profile picture URL claim.
+- name: created_at
+  description: Account creation timestamp claim.
+- name: identities
+  description: Linked identity-provider identities for the user.
+- name: phone
+  description: The user's phone number claim.
+- name: address
+  description: The user's address claim.
+resource_scopes:
+  published: false
+  note: >-
+    No product/resource scopes (leave, employee, payroll, claim, document) are published anywhere on
+    Sparrow's public surface. An integrator cannot see what a Sparrow access token would be allowed
+    to do.
+evidence:
+- url: https://login.trysparrow.com/.well-known/openid-configuration
+  status: 200

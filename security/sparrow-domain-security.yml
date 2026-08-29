@@ -1,0 +1,59 @@
+generated: '2026-08-28'
+method: probed
+source: >-
+  Live DNS/TLS/HTTP probes (probe-domain-security.py plus dig/openssl probes of the additional
+  trysparrow.com hosts named in the app.trysparrow.com Content-Security-Policy).
+note: >-
+  Sparrow runs two domains. trysparrow.com is the original operating domain and still carries the
+  application, the API backend, sign-in, support and status; sparrow.com is the newer marketing
+  domain. The security posture differs sharply between them: trysparrow.com is DNSSEC-signed and has
+  both SPF and a DMARC policy at p=quarantine, while sparrow.com has no SPF, no DMARC and no DNSKEY.
+  Neither domain publishes a CAA record. HSTS is enforced on app.trysparrow.com
+  (max-age=63072000; includeSubDomains) but explicitly disabled on app.sparrow.com (max-age=0).
+hosts:
+- host: sparrow.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Oct 23 08:29:29 2026 GMT
+  hsts: null
+- host: trysparrow.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Oct 11 13:11:48 2026 GMT
+  hsts: null
+  note: 301 redirect host
+- host: app.sparrow.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Oct 23 08:29:29 2026 GMT
+  hsts: 'max-age=0'
+  note: HSTS header present but max-age is zero, which disables it.
+- host: app.trysparrow.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Oct 11 13:11:48 2026 GMT
+  hsts: 'max-age=63072000; includeSubDomains'
+  x_frame_options: deny
+  csp: true
+  csp_note: >-
+    A strict Content-Security-Policy with default-src 'none' is served. It is also the artifact that
+    revealed Sparrow's own origins — api.trysparrow.com, login.trysparrow.com, support.trysparrow.com
+    and uploads.trysparrow.com.
+domains:
+- domain: sparrow.com
+  dnssec: false
+  caa: []
+  spf: false
+  dmarc: false
+- domain: trysparrow.com
+  dnssec: true
+  dnskey: present
+  caa: []
+  spf: true
+  spf_record: >-
+    v=spf1 include:_spf.google.com include:emsd1.com include:u12511619.wl120.sendgrid.net
+    include:mail.zendesk.com include:39814015.spf07.hubspotemail.net ~all
+  dmarc: true
+  dmarc_policy: quarantine
+  dmarc_record: 'v=DMARC1; p=quarantine; adkim=r; aspf=r; rua=mailto:REDACTED@trysparrow.com'
+  mx: google

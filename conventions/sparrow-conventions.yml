@@ -1,0 +1,60 @@
+generated: '2026-08-28'
+method: derived
+source: >-
+  Derived from this repo's own artifacts (authentication/, well-known/, lifecycle/) after an
+  exhaustive contract search found no OpenAPI, AsyncAPI, GraphQL SDL, Protobuf, WSDL, MCP server or
+  agent card on any Sparrow host.
+note: >-
+  Sparrow exposes no public write surface, so the runtime-semantics dimensions below are recorded as
+  `na` — not-applicable, not zero. HRIS, payroll, carrier and state-agency integration is delivered
+  by file feed and by Sparrow's specialist team, per the company's own FAQ. The only anonymously
+  readable machine surface is the OIDC discovery document on login.trysparrow.com, which governs
+  sign-in, not resource access.
+auth_style:
+  style: openid-connect
+  detail: >-
+    Authorization Code with PKCE (S256) against https://login.trysparrow.com/, plus SAML SSO for
+    enterprise customers. See authentication/sparrow-authentication.yml.
+idempotency:
+  supported: na
+  header: null
+  note: No public write surface, so idempotency is not applicable.
+pagination:
+  style: na
+  note: No published API reference.
+field_expansion:
+  supported: na
+metadata:
+  supported: na
+request_id_tracing:
+  supported: na
+versioning:
+  scheme: na
+  note: See lifecycle/sparrow-lifecycle.yml — no versioning policy published.
+error_envelope:
+  format: na
+  rfc9457: false
+  note: No published error contract.
+rate_limit_signaling:
+  headers: []
+  note: See rate-limits/sparrow-rate-limits.yml — nothing published or observable.
+dry_run_mode:
+  supported: na
+  note: No public write surface.
+reversibility:
+  grade: na
+  note: >-
+    NOT APPLICABLE, NOT ZERO. Sparrow publishes no API and therefore no write operation an agent
+    could take, so there is no action to reverse and no window to state. Leave cancellations,
+    extensions and claim corrections are real business operations inside Sparrow's product, but they
+    are performed by people through the web application and Sparrow's specialist team, and no
+    reversal operation, operationId or time window is published anywhere on the public surface.
+    Nothing is asserted here that the provider has not published — an invented window would be the
+    most expensive possible error in this artifact.
+  operations: []
+cross_links:
+- authentication/sparrow-authentication.yml
+- scopes/sparrow-scopes.yml
+- lifecycle/sparrow-lifecycle.yml
+- rate-limits/sparrow-rate-limits.yml
+- well-known/sparrow-well-known.yml

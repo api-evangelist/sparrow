@@ -1,17 +1,33 @@
 aid: sparrow
 name: Sparrow
-description: 'Sparrow is a company surfaced via the API Evangelist harvest backlog (source: secondary-market)
-  and added to the network as a stub for full-pipeline profiling.'
+description: >-
+  Sparrow is an end-to-end employee leave management platform for employers in the United States
+  and Canada, pairing software with a team of leave specialists to administer FMLA, CFRA, parental,
+  medical and state paid-leave programs. The platform automates employee intake, files the
+  associated insurance claims, coordinates with medical providers, delivers required notices, builds
+  a personalized leave and financial plan for each employee, and reconciles leave pay back into
+  payroll. Sparrow connects to customer HRIS and payroll systems — Workday, BambooHR, Gusto and ADP
+  among them — by file feed rather than through a public developer API, and it publishes no
+  developer portal, OpenAPI or SDK. The company was founded in 2018 in San Francisco by Deborah
+  Hanus and Samarth Keshava, has raised roughly $64M across Series A and Series B rounds, and its
+  shares are quoted on secondary marketplaces such as Forge Global.
 url: https://raw.githubusercontent.com/api-evangelist/sparrow/refs/heads/main/apis.yml
+image: https://images.ctfassets.net/xtppkev0deqn/wKGxeLeF2NiRU2VbwufDO/2b4373da7eb50e8252d6874221bbb2fe/Sparrow_Preview_Card_Static.png
 x-type: company
 x-source: harvest:secondary-market
-x-tier: stub
-x-tier-reason: harvest
 specificationVersion: '0.20'
 created: '2026-08-28'
 modified: '2026-08-28'
 tags:
 - Company
+- Leave Management
+- Human Resources
+- HR Tech
+- Payroll
+- Compliance
+- Employee Benefits
+- Absence Management
+- SaaS
 apis: []
 maintainers:
 - FN: Kin Lane
@@ -19,5 +35,75 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: DomainSecurity
+  url: security/sparrow-domain-security.yml
 - type: Website
-  url: https://forgeglobal.com/sparrow_stock/
+  url: https://sparrow.com/
+- type: Blog
+  url: https://sparrow.com/blog/
+- type: FAQ
+  url: https://sparrow.com/faq/
+- type: SignUp
+  url: https://app.trysparrow.com/start/
+- type: Login
+  url: https://app.sparrow.com/
+- type: TermsOfService
+  url: https://sparrow.com/terms/
+- type: PrivacyPolicy
+  url: https://sparrow.com/privacy/
+- type: GitHubOrganization
+  url: https://github.com/trysparrow
+- type: LinkedIn
+  url: https://www.linkedin.com/company/sparrowinc/
+- type: Careers
+  url: https://sparrow.com/careers/
+- type: StatusPage
+  url: https://status.trysparrow.com/
+- type: Lifecycle
+  url: lifecycle/sparrow-lifecycle.yml
+- type: Security
+  url: security/sparrow-vulnerability-disclosure.yml
+- type: VulnerabilityDisclosure
+  url: security/sparrow-vulnerability-disclosure.yml
+- type: TrustCenter
+  url: security/sparrow-trust-center.yml
+- type: Compliance
+  url: security/sparrow-trust-center.yml
+- type: Conformance
+  url: conformance/sparrow-conformance.yml
+- type: LLMsTxt
+  url: llms/sparrow-llms.txt
+- type: WellKnown
+  url: well-known/sparrow-well-known.yml
+- type: Authentication
+  url: authentication/sparrow-authentication.yml
+- type: OAuthScopes
+  url: scopes/sparrow-scopes.yml
+- type: Conventions
+  url: conventions/sparrow-conventions.yml
+
+x-enrichment:
+  date: '2026-08-28'
+  status: minimal
+  artifacts_added: 15
+  pass: local-v1
+x-coverage:
+  state: none
+  reason: no-developer-program
+  detail: >-
+    Sparrow ships leave management only as an end-user web application: its own FAQ answers the
+    integration question with "Sparrow can integrate with your HRIS via file feed", there is no
+    developer portal, and the backend its SPA calls (api.trysparrow.com, named in the
+    app.trysparrow.com Content-Security-Policy) returns a bare 404 to every anonymous path including
+    /openapi.json and every /.well-known/ location.
+  evidence:
+    - url: https://api.trysparrow.com/openapi.json
+      status: 404
+    - url: https://sparrow.com/faq/
+      status: 200
+    - url: https://sparrow.com/openapi.json
+      status: 404
+    - url: https://github.com/trysparrow
+      status: 200
+  checked: '2026-08-28'
+

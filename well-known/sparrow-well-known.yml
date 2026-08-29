@@ -1,0 +1,193 @@
+generated: '2026-08-28'
+method: probed
+source: >-
+  Direct anonymous HTTPS probes of /.well-known/ paths on every Sparrow host discovered from
+  apis.yml, the sparrow.com sitemap, and the Content-Security-Policy header served by
+  app.trysparrow.com (which names api.trysparrow.com, login.trysparrow.com, support.trysparrow.com
+  and uploads.trysparrow.com as the application's own origins).
+note: >-
+  One real document set was found, and it is on Sparrow's own domain: login.trysparrow.com serves an
+  OpenID Connect discovery document, an RFC 8414 authorization-server metadata document and a JWKS.
+  That host is Sparrow's Auth0 custom domain (issuer https://login.trysparrow.com/) and is named as
+  the app's auth origin in the app.trysparrow.com CSP. Every /.well-known/ path on app.sparrow.com,
+  app.trysparrow.com and support.trysparrow.com answers HTTP 200 with the same SPA/HTML shell
+  regardless of path — those are catch-all false positives, not documents, and are recorded as
+  misses. status.trysparrow.com does serve a security.txt, but it redirects to
+  sparrowstatus.com/.well-known/security.txt and its contents are Atlassian's
+  (Canonical https://www.atlassian.com/.well-known/security.txt, contact security@atlassian.com) —
+  it belongs to the Statuspage platform, not to Sparrow, so no SecurityTxt pointer is emitted.
+  Sparrow's own vulnerability reporting address is published at https://sparrow.com/responsible-disclosure/
+  instead of in a security.txt.
+hosts:
+- host: sparrow.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: null
+    note: no response within 10s (Cloudflare edge closed the connection); one attempt, not retried
+  - path: /.well-known/oauth-authorization-server
+    status: 499
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 499
+  - path: /.well-known/agent.json
+    status: 404
+- host: trysparrow.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 499
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 499
+  - path: /.well-known/agent.json
+    status: 404
+- host: login.trysparrow.com
+  note: Sparrow's Auth0 custom domain; issuer https://login.trysparrow.com/
+  documents:
+  - path: /.well-known/openid-configuration
+    status: 200
+    content_type: application/json
+    file: sparrow-login-openid-configuration.json
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    content_type: application/json
+    file: sparrow-login-oauth-authorization-server.json
+  - path: /.well-known/jwks.json
+    status: 200
+    content_type: application/json
+    file: sparrow-login-jwks.json
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+- host: api.trysparrow.com
+  note: >-
+    The application backend named in the app.trysparrow.com CSP. Every path probed returns a bare
+    404 "Not Found" page; nothing is published anonymously.
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+- host: app.sparrow.com
+  note: SPA catch-all — every path returns HTTP 200 with the same 5,026-byte HTML shell; all misses.
+  documents:
+  - path: /.well-known/security.txt
+    status: 200
+    result: html-shell
+  - path: /.well-known/openid-configuration
+    status: 200
+    result: html-shell
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    result: html-shell
+  - path: /.well-known/api-catalog
+    status: 200
+    result: html-shell
+  - path: /.well-known/ai-plugin.json
+    status: 200
+    result: html-shell
+  - path: /.well-known/agent-card.json
+    status: 200
+    result: html-shell
+  - path: /.well-known/agent.json
+    status: 200
+    result: html-shell
+- host: app.trysparrow.com
+  note: Same SPA catch-all as app.sparrow.com; all misses.
+  documents:
+  - path: /.well-known/security.txt
+    status: 200
+    result: html-shell
+  - path: /.well-known/openid-configuration
+    status: 200
+    result: html-shell
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    result: html-shell
+  - path: /.well-known/api-catalog
+    status: 200
+    result: html-shell
+  - path: /.well-known/ai-plugin.json
+    status: 200
+    result: html-shell
+  - path: /.well-known/agent-card.json
+    status: 200
+    result: html-shell
+  - path: /.well-known/agent.json
+    status: 200
+    result: html-shell
+- host: support.trysparrow.com
+  note: Zendesk help centre; HTML shell on every /.well-known/ path; all misses.
+  documents:
+  - path: /.well-known/security.txt
+    status: 200
+    result: html-shell
+  - path: /.well-known/openid-configuration
+    status: 200
+    result: html-shell
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    result: html-shell
+  - path: /.well-known/api-catalog
+    status: 200
+    result: html-shell
+  - path: /.well-known/ai-plugin.json
+    status: 200
+    result: html-shell
+  - path: /.well-known/agent-card.json
+    status: 200
+    result: html-shell
+  - path: /.well-known/agent.json
+    status: 200
+    result: html-shell
+- host: status.trysparrow.com
+  note: >-
+    Atlassian Statuspage. The served security.txt redirects to sparrowstatus.com and is Atlassian's
+    own signed document, not Sparrow's — recorded, not credited.
+  documents:
+  - path: /.well-known/security.txt
+    status: 200
+    result: third-party-document
+    owner: Atlassian (Statuspage)
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404

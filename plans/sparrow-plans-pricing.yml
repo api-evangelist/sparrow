@@ -1,0 +1,28 @@
+generated: '2026-08-28'
+method: searched
+source: https://sparrow.com/faq/
+note: >-
+  Sparrow publishes NO plans, tiers, list prices or usage quotas. https://sparrow.com/pricing/ returns
+  404, the sitemap contains no pricing page, and the FAQ's own Pricing section says in full: "What is
+  your pricing structure like? Once you've booked a call with our sales team, we'll create a custom
+  proposal catered to your specific needs." Every path to a number runs through
+  https://sparrow.com/demo/. The FAQ also invites nonprofit discount enquiries without stating a
+  discount. This is a fully sales-gated, custom-proposal commercial model.
+model: custom-proposal
+plan_count: 0
+plans: []
+currency: null
+free_tier: false
+self_serve_signup:
+  available: false
+  note: >-
+    https://app.trysparrow.com/start/ is customer onboarding for an already-signed account, not
+    self-serve purchase.
+quote_path: https://sparrow.com/demo/
+evidence:
+- url: https://sparrow.com/pricing/
+  status: 404
+- url: https://sparrow.com/faq/
+  status: 200
+- url: https://sparrow.com/demo/
+  status: 200

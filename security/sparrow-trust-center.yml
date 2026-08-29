@@ -1,0 +1,44 @@
+generated: '2026-08-28'
+method: searched
+source: https://trust.trysparrow.com/
+url: https://trust.trysparrow.com/
+platform: SafeBase (Drata)
+published: true
+note: >-
+  The trust centre answers 403 to a plain curl (Cloudflare bot policy) but renders normally to a
+  browser-class fetch, so it is live, not dead. It mixes public documents with gated ones — an "Ask
+  for information" / "Get access" flow stands behind the sensitive material, with support@trysparrow.com
+  as the access contact.
+certifications:
+- name: SOC 2 Type II
+  evidence: >-
+    "Sparrow has been audited by an independent firm who has confirmed that Sparrow meets the
+    requirements set forth ... Trust Services Criteria for Security, Availability, Processing
+    Integrity, Confidentiality, and Privacy." (https://sparrow.com/security/)
+- name: ISO/IEC 27001
+  evidence: Listed on the trust centre; described on https://sparrow.com/security/ as an ongoing commitment to managing physical, technical and legal controls.
+- name: ISO/IEC 27001 Statement of Applicability
+  evidence: Listed as a separate document on the trust centre.
+- name: ISO/IEC 27701
+  evidence: Listed on the trust centre (privacy information management).
+- name: ISO 22301
+  evidence: Business continuity management system, referenced on both the trust centre and https://sparrow.com/security/.
+- name: GDPR
+  evidence: '"Sparrow is GDPR compliant in accordance with AT-C 315" (https://sparrow.com/security/)'
+- name: CCPA
+  evidence: Listed on the trust centre.
+- name: PIPEDA
+  evidence: Listed on the trust centre; consistent with Sparrow operating leave programmes in Canada.
+document_access:
+  public_documents: true
+  gated_documents: true
+  request_flow: '"Ask for information" / "Get access" request on the trust centre'
+  contact: support@trysparrow.com
+evidence:
+- url: https://trust.trysparrow.com/
+  status: 403
+  note: 403 to curl (bot policy); page renders and was read via a browser-class fetch — live, not dead.
+- url: https://sparrow.com/security/
+  status: 200
+- url: https://sparrow.com/security-policy/
+  status: 200

@@ -1,0 +1,85 @@
+generated: '2026-08-28'
+method: probed
+source: https://login.trysparrow.com/.well-known/openid-configuration
+docs: https://sparrow.com/security/
+note: >-
+  Sparrow publishes no developer API and no API-key or OAuth programme for third parties. What IS
+  anonymously published is the authentication surface of Sparrow's own web application: an OpenID
+  Connect provider on Sparrow's custom domain login.trysparrow.com (an Auth0 tenant — the app's CSP
+  names trysparrow-samlidp.us.auth0.com as a permitted frame source, and Sparrow's security page
+  documents SAML SSO for enterprise customers). This profile is derived entirely from the
+  anonymously-served discovery document; it describes how humans and Sparrow's own SPA sign in, NOT
+  a partner-facing authorization server. No client registration is open to the public.
+surface: end-user and customer application sign-in
+issuer: https://login.trysparrow.com/
+provider: Auth0 (custom domain on trysparrow.com)
+schemes:
+- name: sparrow_oidc
+  type: openIdConnect
+  openIdConnectUrl: https://login.trysparrow.com/.well-known/openid-configuration
+  endpoints:
+    authorization: https://login.trysparrow.com/authorize
+    token: https://login.trysparrow.com/oauth/token
+    userinfo: https://login.trysparrow.com/userinfo
+    jwks: https://login.trysparrow.com/.well-known/jwks.json
+    revocation: https://login.trysparrow.com/oauth/revoke
+    device_authorization: https://login.trysparrow.com/oauth/device/code
+    backchannel_authentication: https://login.trysparrow.com/bc-authorize
+    dynamic_registration: https://login.trysparrow.com/oidc/register
+  grant_types:
+  - authorization_code
+  - client_credentials
+  - refresh_token
+  - password
+  - implicit
+  - urn:ietf:params:oauth:grant-type:device_code
+  - urn:ietf:params:oauth:grant-type:token-exchange
+  - urn:ietf:params:oauth:grant-type:jwt-bearer
+  response_types:
+  - code
+  - token
+  - id_token
+  - code id_token
+  token_endpoint_auth_methods:
+  - client_secret_basic
+  - client_secret_post
+  - private_key_jwt
+  - none
+  pkce:
+    supported: true
+    code_challenge_methods:
+    - S256
+    - plain
+  dpop:
+    supported: true
+    signing_alg_values:
+    - ES256
+  id_token_signing_algs:
+  - HS256
+  - RS256
+  - PS256
+  mfa:
+    supported: true
+    challenge_endpoint: https://login.trysparrow.com/mfa/challenge
+    grant_types:
+    - http://auth0.com/oauth/grant-type/mfa-oob
+    - http://auth0.com/oauth/grant-type/mfa-otp
+    - http://auth0.com/oauth/grant-type/mfa-recovery-code
+  backchannel_logout:
+    supported: true
+    session_supported: true
+  federation:
+    saml: true
+    note: >-
+      SAML SSO is offered to enterprise customers via trysparrow-samlidp.us.auth0.com (named in the
+      app.trysparrow.com Content-Security-Policy) and referenced on the Sparrow security page.
+api_key_auth:
+  published: false
+  note: No public API key programme, developer portal, or key-issuance flow is published.
+evidence:
+- url: https://login.trysparrow.com/.well-known/openid-configuration
+  status: 200
+- url: https://login.trysparrow.com/.well-known/jwks.json
+  status: 200
+- url: https://api.trysparrow.com/.well-known/oauth-protected-resource
+  status: 404

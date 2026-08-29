@@ -1,0 +1,91 @@
+generated: '2026-08-28'
+method: probed
+source: >-
+  https://login.trysparrow.com/.well-known/openid-configuration (probed), https://sparrow.com/security/
+  and https://trust.trysparrow.com/ (searched). Sparrow publishes no API contract, so every
+  API-shaped standard below is asserted false on the basis of an exhaustive negative probe rather
+  than a contract reading.
+standards:
+- id: oauth2
+  conforms: true
+  evidence: >-
+    login.trysparrow.com serves RFC 8414 authorization-server metadata at
+    /.well-known/oauth-authorization-server (HTTP 200) advertising authorization_code,
+    client_credentials, refresh_token, device_code, token-exchange and jwt-bearer grants. This is the
+    sign-in surface of Sparrow's own application, not a partner API.
+- id: oidc
+  conforms: true
+  evidence: >-
+    /.well-known/openid-configuration on login.trysparrow.com returns a complete OpenID Connect
+    discovery document (issuer https://login.trysparrow.com/, JWKS, userinfo, backchannel logout,
+    14 scopes_supported).
+- id: pkce
+  conforms: true
+  evidence: 'code_challenge_methods_supported: [S256, plain] in the discovery document.'
+- id: dpop
+  conforms: true
+  evidence: 'dpop_signing_alg_values_supported: [ES256] in the discovery document.'
+- id: rfc8414
+  conforms: true
+  evidence: OAuth 2.0 Authorization Server Metadata served at the RFC 8414 path, HTTP 200.
+- id: rfc9728
+  conforms: false
+  evidence: /.well-known/oauth-protected-resource returns 404 on api.trysparrow.com and every other host.
+- id: rfc9457
+  conforms: false
+  evidence: No published error contract or problem+json envelope; no OpenAPI exists to read.
+- id: saml
+  conforms: true
+  evidence: >-
+    trysparrow-samlidp.us.auth0.com appears as a permitted frame-src in the app.trysparrow.com
+    Content-Security-Policy, and enterprise SSO is described on https://sparrow.com/security/.
+- id: idempotency
+  conforms: false
+  evidence: No public write surface and no published idempotency semantics.
+- id: pagination
+  conforms: false
+  evidence: No published API reference of any kind.
+- id: scim
+  conforms: false
+  evidence: >-
+    No SCIM schema URN, /scim/v2 endpoint or provisioning documentation found. Sparrow's own FAQ
+    states HRIS and payroll integration is delivered "via file feed".
+- id: odata
+  conforms: false
+  evidence: No $metadata surface on any Sparrow host.
+- id: fhir
+  conforms: false
+  evidence: Not a healthcare data provider; no FHIR surface. Sparrow coordinates with medical providers by paperwork, not by API.
+domain_standards:
+  market: employee leave of absence administration (US/Canada HR, payroll and disability claims)
+  declared: none
+  note: >-
+    REWARD-ONLY CHECK, LEFT EMPTY HONESTLY. The candidate standards for this market — HR Open
+    Standards (formerly HR-XML) for leave/absence and payroll messages, and X12 EDI for disability
+    and absence claim exchange with carriers — are not declared anywhere on Sparrow's public
+    surface, and there is no contract in which such a declaration could appear. Sparrow's own FAQ
+    describes HRIS, payroll, carrier and state-agency integration as handled "via file feed" and by
+    Sparrow's specialist team completing the paperwork, with no published message format. Nothing
+    is asserted here that the provider has not published.
+compliance_programs:
+- id: soc2-type-ii
+  conforms: true
+  evidence: https://sparrow.com/security/ and https://trust.trysparrow.com/
+- id: iso-27001
+  conforms: true
+  evidence: https://trust.trysparrow.com/ (certificate plus Statement of Applicability listed)
+- id: iso-27701
+  conforms: true
+  evidence: https://trust.trysparrow.com/
+- id: iso-22301
+  conforms: true
+  evidence: https://sparrow.com/security/ (BCMS) and https://trust.trysparrow.com/
+- id: gdpr
+  conforms: true
+  evidence: '"Sparrow is GDPR compliant in accordance with AT-C 315" — https://sparrow.com/security/'
+- id: ccpa
+  conforms: true
+  evidence: https://trust.trysparrow.com/
+- id: pipeda
+  conforms: true
+  evidence: https://trust.trysparrow.com/

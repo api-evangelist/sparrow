@@ -1,0 +1,58 @@
+generated: '2026-08-28'
+method: searched
+source: >-
+  https://status.trysparrow.com/ (probed, HTTP 200) and an exhaustive negative search of
+  sparrow.com for versioning, deprecation and changelog pages.
+status_page:
+  published: true
+  url: https://status.trysparrow.com/
+  platform: Atlassian Statuspage
+  page_id: 1n7v4kqnlnbk
+  alternate_url: https://sparrowstatus.com/
+  machine_readable:
+    summary: https://status.trysparrow.com/api/v2/summary.json
+    format: Atlassian Statuspage API v2
+    note: >-
+      Third-party platform API, not a Sparrow contract — but it is a real, anonymously readable
+      runtime signal an agent can poll.
+  components:
+  - Sparrow Platform
+  observed:
+    fetched: '2026-08-28'
+    indicator: none
+    description: All Systems Operational
+  subscriptions:
+  - email
+  - Slack
+  - Microsoft Teams
+  - RSS/Atom (Statuspage default)
+versioning:
+  policy_published: false
+  scheme: null
+  note: No API versioning policy is published, because no public API is published.
+deprecation:
+  policy_published: false
+  sunset_header: unknown
+  rfc8594: false
+  note: >-
+    No deprecation policy, Sunset/Deprecation header documentation, or end-of-life schedule found on
+    sparrow.com or any Sparrow host.
+changelog:
+  published: false
+  note: >-
+    https://sparrow.com/changelog/ returns 404. Product news is published as prose in the blog
+    (https://sparrow.com/blog/) and press posts; there is no dated, structured release log.
+sla:
+  published: false
+  note: >-
+    No public SLA or uptime commitment document. Availability is one of the Trust Services Criteria
+    named in Sparrow's SOC 2 Type II statement, but the report itself is gated behind the trust
+    centre request flow.
+deprecated_operations: []
+evidence:
+- url: https://status.trysparrow.com/
+  status: 200
+- url: https://status.trysparrow.com/api/v2/summary.json
+  status: 200
+- url: https://sparrow.com/changelog/
+  status: 404

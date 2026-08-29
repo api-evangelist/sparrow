@@ -1,0 +1,19 @@
+generated: '2026-08-28'
+method: searched
+source: >-
+  Exhaustive negative search of sparrow.com plus anonymous probes of api.trysparrow.com, the
+  application backend named in the app.trysparrow.com Content-Security-Policy.
+note: >-
+  No rate limits are published, because no public API is published. api.trysparrow.com serves a bare
+  404 to every anonymous path probed, so no runtime rate-limit headers could be observed either.
+  This is an honest zero: there is nothing to document, and nothing was invented.
+limit_count: 0
+limits: []
+response_headers: []
+exhaustion_status_code: null
+retry_after: unknown
+evidence:
+- url: https://api.trysparrow.com/
+  status: 404
+- url: https://sparrow.com/faq/
+  status: 200
