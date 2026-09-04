@@ -12,6 +12,21 @@ description: >-
   Hanus and Samarth Keshava, has raised roughly $64M across Series A and Series B rounds, and its
   shares are quoted on secondary marketplaces such as Forge Global.
 url: https://raw.githubusercontent.com/api-evangelist/sparrow/refs/heads/main/apis.yml
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  - scopes
+  - rate-limits
+  - security
+  generated: '2026-09-02'
+  method: derived
 image: https://images.ctfassets.net/xtppkev0deqn/wKGxeLeF2NiRU2VbwufDO/2b4373da7eb50e8252d6874221bbb2fe/Sparrow_Preview_Card_Static.png
 x-type: company
 x-source: harvest:secondary-market
